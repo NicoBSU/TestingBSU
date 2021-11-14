@@ -8,78 +8,52 @@ namespace Aircompany
 {
     public class Airport
     {
-        public List<Plane> Planes;
+        public readonly List<Plane> Planes;
 
         public Airport(IEnumerable<Plane> planes)
         {
             Planes = planes.ToList();
         }
 
-        public List<PassengerPlane> GetPassengersPlanes()
+        public List<PassengerPlane> GetAllPassengersPlanes()
         {
-            List<PassengerPlane> passengerPlanes = new List<PassengerPlane>();
-            for (int i=0; i < Planes.Count; i++)
-            {
-                if (Planes[i].GetType() == typeof(PassengerPlane))
-                {
-                    passengerPlanes.Add((PassengerPlane)Planes[i]);
-                }
-            }
-            return passengerPlanes;
+            return Planes.Where(p => p.GetType() == typeof(PassengerPlane)).Select(p => (PassengerPlane)p).ToList();
         }
 
-        public List<MilitaryPlane> GetMilitaryPlanes()
+        public List<MilitaryPlane> GetAllMilitaryPlanes()
         {
-            List<MilitaryPlane> militaryPlanes = new List<MilitaryPlane>();
-            for (int i = 0; i < Planes.Count; i++)
-            {
-                if (Planes[i].GetType() == typeof(MilitaryPlane))
-                {
-                    militaryPlanes.Add((MilitaryPlane)Planes[i]);
-                }
-            }
-            return militaryPlanes;
+            return Planes.Where(p => p.GetType() == typeof(MilitaryPlane)).Select(p => (MilitaryPlane)p).ToList();
         }
 
         public PassengerPlane GetPassengerPlaneWithMaxPassengersCapacity()
         {
-            List<PassengerPlane> passengerPlanes = GetPassengersPlanes();
-            return passengerPlanes.Aggregate((w, x) => w.PassengersCapacityIs() > x.PassengersCapacityIs() ? w : x);             
+            var allPassangerPlanes = GetAllPassengersPlanes();
+            var biggestPassangersCapacity = allPassangerPlanes.Select(pp => pp.GetPassengersCapacity()).ToList().Max();
+            return allPassangerPlanes.Find(pp => pp.GetPassengersCapacity() == biggestPassangersCapacity);
         }
 
         public List<MilitaryPlane> GetTransportMilitaryPlanes()
         {
-            List<MilitaryPlane> transportMilitaryPlanes = new List<MilitaryPlane>();
-            List<MilitaryPlane> militaryPlanes = GetMilitaryPlanes();
-            for (int i = 0; i < militaryPlanes.Count; i++)
-            {
-                MilitaryPlane plane = militaryPlanes[i];
-                if (plane.PlaneTypeIs() == MilitaryType.TRANSPORT)
-                {
-                    transportMilitaryPlanes.Add(plane);
-                }
-            }
-
-            return transportMilitaryPlanes;
+            return GetAllMilitaryPlanes().Where(mp => mp.GetPlaneType() == MilitaryType.TRANSPORT).ToList();
         }
 
-        public Airport SortByMaxDistance()
+        public Airport SortByMaxFlightDistance()
         {
-            return new Airport(Planes.OrderBy(w => w.MAXFlightDistance()));
+            return new Airport(Planes.OrderBy(w => w.GetMaxFlightDistance()));
         }
 
         public Airport SortByMaxSpeed()
         {
-            return new Airport(Planes.OrderBy(w => w.GetMS()));
+            return new Airport(Planes.OrderBy(w => w.GetMaxSpeed()));
         }
 
         public Airport SortByMaxLoadCapacity()
         {
-            return new Airport(Planes.OrderBy(w => w.MAXLoadCapacity()));
+            return new Airport(Planes.OrderBy(w => w.GetMaxLoadCapacity()));
         }
 
 
-        public IEnumerable<Plane> GetPlanes()
+        public IEnumerable<Plane> GetAllPlanes()
         {
             return Planes;
         }

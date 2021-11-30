@@ -68,7 +68,7 @@ namespace Aircompany
 
             foreach (var plane in militaryPlanes)
             {
-                if (plane.Type == MilitaryType.Transport)
+                if (plane.Type == MilitaryType.TRANSPORT)
                 {
                     transportMilitaryPlanes.Add(plane);
                 }

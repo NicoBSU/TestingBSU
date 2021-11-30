@@ -1,2 +1,0 @@
-# TestingBSU
-testing

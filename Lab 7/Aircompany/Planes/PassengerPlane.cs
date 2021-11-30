@@ -2,44 +2,28 @@
 
 namespace Aircompany.Planes
 {
-    public class PassengerPlane : Plane
+    public class PassengerPlane : Plane, IEquatable<PassengerPlane>
     {
-        private int _passengersCapacity;
-
         public PassengerPlane(string model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity, int passengersCapacity)
             :base(model, maxSpeed, maxFlightDistance, maxLoadCapacity)
         {
-            _passengersCapacity = passengersCapacity;
+            if (passengersCapacity > this.MaxLoadCapacity)
+            {
+                throw new ArgumentException("Passengers capacity is more than max load capacity.");
+            }
+            
+            this.PassengersCapacity = passengersCapacity;
         }
-
-        public override bool Equals(object obj)
-        {
-            var plane = obj as PassengerPlane;
-            return plane != null &&
-                   base.Equals(obj) &&
-                   _passengersCapacity == plane._passengersCapacity;
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = 751774561;
-            hashCode = hashCode * -1521134295 + base.GetHashCode();
-            hashCode = hashCode * -1521134295 + _passengersCapacity.GetHashCode();
-            return hashCode;
-        }
-
-        public int GetPassengersCapacity()
-        {
-            return _passengersCapacity;
-        }
-
-       
-        public override string ToString()
-        {
-            return base.ToString().Replace("}",
-                    ", passengersCapacity=" + _passengersCapacity +
-                    '}');
-        }       
         
+        public int PassengersCapacity { get; }
+
+        public bool Equals(PassengerPlane other) =>
+            base.Equals(other) && this.PassengersCapacity == other!.PassengersCapacity;
+
+        public override bool Equals(object obj) => obj is PassengerPlane plane && this.Equals(plane);
+
+        public override int GetHashCode() => (this.PassengersCapacity, base.GetHashCode()).GetHashCode();
+
+        public override string ToString() => base.ToString() + $", passengersCapacity = {this.PassengersCapacity}";
     }
 }

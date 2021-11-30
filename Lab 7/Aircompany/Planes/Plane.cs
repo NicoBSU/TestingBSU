@@ -1,71 +1,67 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace Aircompany.Planes
 {
-    public abstract class Plane
+    public abstract class Plane : IEquatable<Plane>
     {
-        private readonly string _model;
-        private int _maxSpeed;
-        private int _maxFlightDistance;
-        private int _maxLoadCapacity;
-
         public Plane(string model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity)
         {
-            _model = model;
-            _maxSpeed = maxSpeed;
-            _maxFlightDistance = maxFlightDistance;
-            _maxLoadCapacity = maxLoadCapacity;
+            this.Verify(model, maxSpeed, maxFlightDistance, maxLoadCapacity);
+            
+            this.Model = model;
+            this.MaxSpeed = maxSpeed;
+            this.MaxFlightDistance = maxFlightDistance;
+            this.MaxLoadCapacity = maxLoadCapacity;
         }
+        
+        public string Model { get; }
+        
+        public int MaxSpeed { get; }
+        
+        public int MaxFlightDistance { get; }
+        
+        public int MaxLoadCapacity { get; }
+        
 
-        public string GetModel()
+        public override string ToString() => $"Plane model: {this.Model}" +
+                $", maxSpeed = {this.MaxSpeed}" +
+                $", maxFlightDistance = {this.MaxFlightDistance}" +
+                $", maxLoadCapacity = {this.MaxLoadCapacity}";
+
+        public bool Equals(Plane other)
+            => other is not null && 
+               Model == other.Model &&
+               MaxSpeed == other.MaxSpeed &&
+               MaxFlightDistance == other.MaxFlightDistance &&
+               MaxLoadCapacity == other.MaxLoadCapacity;
+
+
+        public override bool Equals(object obj) => obj is Plane plane && this.Equals(plane);
+
+        public override int GetHashCode() 
+            => (this.Model, this.MaxSpeed, this.MaxLoadCapacity, this.MaxFlightDistance).GetHashCode();
+
+        private void Verify(string model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity)
         {
-            return _model;
+            if (string.IsNullOrEmpty(model))
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            if (maxSpeed < 0)
+            {
+                throw new ArgumentException("Max speed is less than zero.");
+            }
+            
+            if (maxFlightDistance < 0)
+            {
+                throw new ArgumentException("Max flight distance is less than zero.");
+            }
+            
+            if (maxLoadCapacity < 0)
+            {
+                throw new ArgumentException("Max load capacity is less than zero.");
+            }
         }
-
-        public int GetMaxSpeed()
-        {
-            return _maxSpeed;
-        }
-
-        public int GetMaxFlightDistance()
-        {
-            return _maxFlightDistance;
-        }
-
-        public int GetMaxLoadCapacity()
-        {
-            return _maxLoadCapacity;
-        }
-
-        public override string ToString()
-        {
-            return "Plane{" +
-                "model='" + _model + '\'' +
-                ", maxSpeed=" + _maxSpeed +
-                ", maxFlightDistance=" + _maxFlightDistance +
-                ", maxLoadCapacity=" + _maxLoadCapacity +
-                '}';
-        }
-
-        public override bool Equals(object obj)
-        {
-            var plane = obj as Plane;
-            return plane != null &&
-                   _model == plane._model &&
-                   _maxSpeed == plane._maxSpeed &&
-                   _maxFlightDistance == plane._maxFlightDistance &&
-                   _maxLoadCapacity == plane._maxLoadCapacity;
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -1043886837;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_model);
-            hashCode = hashCode * -1521134295 + _maxSpeed.GetHashCode();
-            hashCode = hashCode * -1521134295 + _maxFlightDistance.GetHashCode();
-            hashCode = hashCode * -1521134295 + _maxLoadCapacity.GetHashCode();
-            return hashCode;
-        }        
-
     }
 }

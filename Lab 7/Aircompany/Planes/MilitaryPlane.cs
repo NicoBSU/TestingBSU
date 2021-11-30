@@ -1,44 +1,24 @@
-﻿using Aircompany.Models;
+﻿using System;
+using Aircompany.Models;
 
 namespace Aircompany.Planes
 {
-    public class MilitaryPlane : Plane
+    public class MilitaryPlane : Plane, IEquatable<MilitaryPlane>
     {
-        private MilitaryType _type;
-
         public MilitaryPlane(string model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity, MilitaryType type)
             : base(model, maxSpeed, maxFlightDistance, maxLoadCapacity)
         {
-            _type = type;
+            this.Type = type;
         }
+        
+        public MilitaryType Type { get; }
 
-        public override bool Equals(object obj)
-        {
-            var plane = obj as MilitaryPlane;
-            return plane != null &&
-                   base.Equals(obj) &&
-                   _type == plane._type;
-        }
+        public bool Equals(MilitaryPlane other) => base.Equals(other) && this.Type == other!.Type;
 
-        public override int GetHashCode()
-        {
-            var hashCode = 1701194404;
-            hashCode = hashCode * -1521134295 + base.GetHashCode();
-            hashCode = hashCode * -1521134295 + _type.GetHashCode();
-            return hashCode;
-        }
+        public override bool Equals(object obj) => obj is MilitaryPlane plane && this.Equals(plane);
 
-        public MilitaryType GetPlaneType()
-        {
-            return _type;
-        }
+        public override int GetHashCode() => (this.Type, base.GetHashCode()).GetHashCode();
 
-
-        public override string ToString()
-        {
-            return base.ToString().Replace("}",
-                    ", type=" + _type +
-                    '}');
-        }        
+        public override string ToString() => base.ToString() + $", type: {this.Type}";
     }
 }

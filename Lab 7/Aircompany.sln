@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircompany", "Aircompany\Aircompany.csproj", "{813DDE36-2282-4A6D-8D8C-7FC7005840FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AircompanyTests", "AircompanyTests\AircompanyTests.csproj", "{FACEF2D9-8F0D-4D3F-B259-E6DB1A16035B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{813DDE36-2282-4A6D-8D8C-7FC7005840FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{813DDE36-2282-4A6D-8D8C-7FC7005840FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{813DDE36-2282-4A6D-8D8C-7FC7005840FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{813DDE36-2282-4A6D-8D8C-7FC7005840FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FACEF2D9-8F0D-4D3F-B259-E6DB1A16035B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FACEF2D9-8F0D-4D3F-B259-E6DB1A16035B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FACEF2D9-8F0D-4D3F-B259-E6DB1A16035B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FACEF2D9-8F0D-4D3F-B259-E6DB1A16035B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,8 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircompany.Tests", "Aircompany.Tests\Aircompany.Tests.csproj", "{359ABD7B-8D08-427C-93A7-13993F8F6133}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aircompany", "Aircompany\Aircompany.csproj", "{D238A639-AF74-4217-9FDE-73C6014B3BC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aircompany", "Aircompany\Aircompany.csproj", "{D238A639-AF74-4217-9FDE-73C6014B3BC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +21,11 @@ Global
 		{D238A639-AF74-4217-9FDE-73C6014B3BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D238A639-AF74-4217-9FDE-73C6014B3BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D238A639-AF74-4217-9FDE-73C6014B3BC0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E7DC61AD-97F9-4355-9CB1-74FAC09F3393}
 	EndGlobalSection
 EndGlobal

@@ -22,21 +22,22 @@ namespace Lab8.Pages
         public IWebElement NightsButton => FindBy(By.XPath(XPathNights));
         public IWebElement SubmitButton => FindBy(By.XPath(XPathSearchButton));
 
-        public HomePage EnterLocation(string location)
+        public HomePage EnterLocation(string country, string city)
         {
             //By clicking on location button we open modal
             LocationButton.Click();
 
             //Then we find button to click on
-            var cssSelectorCountry = "#page > div.tv_drop_panel.TVCityPanel > div.tv_content > div > div.TVTableCitiesHeader.TVWithoutFlightEnabled > div.TVTableCitiesNations > div.TVNationContainer.TVNationSelected";
-            var countryButton = FindBy(By.CssSelector(cssSelectorCountry));
+            var xPathCountrySelection = 
+                $"//div[@class='TVNationContainer' and contains(text(), {country})]";
+            var countryButton = FindBy(By.XPath(xPathCountrySelection));
             countryButton.Click();
 
 
 
             //Then we select city
-            var cssSelectorCity = "#page > div.tv_drop_panel.TVCityPanel > div.tv_content > div > div.TVTableCitiesBody > div > div:nth-child(4) > div.TVCheckBox.TVTableCitiesItem.TVDisableCheckbox";
-            var cityButton = FindBy(By.CssSelector(cssSelectorCity));
+            var xPathCitySelection = $"//div[@class='TVCheckBox TVTableCitiesItem TVDisableCheckbox' and contains(text(),{city})]";
+            var cityButton = FindBy(By.XPath(xPathCitySelection));
             cityButton.Click();
 
             return this;
@@ -48,12 +49,8 @@ namespace Lab8.Pages
             CountryButton.Click();
 
 
-            //Then We Select Country by our parameter (also we fix encoding to launch on ubuntu jenkins)
-            var xPathCountryButton = $"//div[@class='TVCountryItemCheckbox' and ./div/div[contains(text(), {country})]]";
-            var bytes = Encoding.Default.GetBytes(xPathCountryButton);
-            xPathCountryButton = Encoding.UTF8.GetString(bytes);
-
-
+            //Then We Select Country
+            var xPathCountryButton = $"//div[@class='TVCountryCheckboxContent' and ./div[contains(text(), {country})]]";
             var countryButton = FindBy(By.XPath(xPathCountryButton));
             countryButton.Click();
 

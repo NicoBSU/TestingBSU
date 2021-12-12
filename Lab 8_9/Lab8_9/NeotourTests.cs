@@ -25,9 +25,8 @@ namespace Lab8
         public void SearchToursTest()
         {
             var homePage = new HomePage(_driver).OpenPage();
-            Console.WriteLine("Проверка на русские символы");
-            homePage.EnterLocation("Беларусь","Минск")
-                .EnterCountry("Египет")
+            homePage.EnterStartLocation("Беларусь","Минск")
+                .DestinationCountry("Египет")
                 .EnterDates(17,20)
                 .EnterNights(7,12)
                 .SearchTours();

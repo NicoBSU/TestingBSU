@@ -72,10 +72,8 @@ namespace Lab8.Pages
             var xPathLaterDeparture = $"//td[@class='TVAvailableDays' and @data-value='{laterDepartureDate}']";
 
             var earlierDepartureButton = FindBy(By.XPath(xPathEarlierDeparture));
-            Thread.Sleep(1000);
             earlierDepartureButton.Click();
             var laterDepartureButton = FindBy(By.XPath(xPathLaterDeparture));
-            Thread.Sleep(1000);
             laterDepartureButton.Click();
             
             return this;

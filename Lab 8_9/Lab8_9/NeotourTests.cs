@@ -24,7 +24,7 @@ namespace Lab8
             var homePage = new HomePage(_driver).OpenPage();
 
             homePage.EnterLocation("Минск")
-                .EnterCountry("Egypt")
+                .EnterCountry("Египет")
                 .EnterDates(17,20)
                 .EnterNights(7,12)
                 .SearchTours();

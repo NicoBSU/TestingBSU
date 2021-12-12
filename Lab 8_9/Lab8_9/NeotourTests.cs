@@ -17,6 +17,7 @@ namespace Lab8
         {
             var option = new ChromeOptions();
             option.AddArguments("--headless", "--window-size=1920,1920", "--lang=ru-RU");
+            
             _driver = new ChromeDriver(option);
         }
 
@@ -24,7 +25,7 @@ namespace Lab8
         public void SearchToursTest()
         {
             var homePage = new HomePage(_driver).OpenPage();
-
+            Console.WriteLine("Проверка на русские символы");
             homePage.EnterLocation("Беларусь","Минск")
                 .EnterCountry("Египет")
                 .EnterDates(17,20)

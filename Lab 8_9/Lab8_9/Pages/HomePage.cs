@@ -48,7 +48,8 @@ namespace Lab8.Pages
 
 
             //Then We Select Country by our parameter
-            var countryButton = FindBy(By.XPath($"//*[contains(text(), {country})]"));
+            var xPathCountryButton = $"//div[@class='TVCountryItemCheckbox' and ./div/div[contains(text(),'{country}')]]";
+            var countryButton = FindBy(By.XPath(xPathCountryButton));
             countryButton.Click();
 
             return this;

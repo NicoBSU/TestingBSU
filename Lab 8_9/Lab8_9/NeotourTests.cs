@@ -1,9 +1,7 @@
-using Lab8.Pages;
+п»їusing Lab8.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Text;
 
 namespace Lab8
 {
@@ -25,8 +23,8 @@ namespace Lab8
         public void SearchToursTest()
         {
             var homePage = new HomePage(_driver).OpenPage();
-            homePage.EnterStartLocation("Беларусь","Минск")
-                .DestinationCountry("Египет")
+            homePage.EnterStartLocation("Р‘РµР»Р°СЂСѓСЃСЊ","РњРёРЅСЃРє")
+                .DestinationCountry("Р•РіРёРїРµС‚")
                 .EnterDates(17,20)
                 .EnterNights(7,12)
                 .SearchTours();

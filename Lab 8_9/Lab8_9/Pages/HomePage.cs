@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -109,6 +110,7 @@ namespace Lab8.Pages
         private IWebElement FindBy(By key)
         {
             return new WebDriverWait(WebDriver, TimeSpan.FromSeconds(5)).Until(driver => driver.FindElement(key));
+            Thread.Sleep(1000);
         }
     }
 }

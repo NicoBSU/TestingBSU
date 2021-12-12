@@ -28,16 +28,18 @@ namespace Lab8.Pages
             LocationButton.Click();
 
             //Then we find button to click on
-            var xPathCountrySelection = 
-                $"//div[@class='TVNationContainer' and contains(text(), {country})]";
-            var countryButton = FindBy(By.XPath(xPathCountrySelection));
+            var xPathCountrySelection = "#page > div.tv_drop_panel.TVCityPanel > div.tv_content > div > div.TVTableCitiesHeader.TVWithoutFlightEnabled > div.TVTableCitiesNations > div.TVNationContainer.TVNationSelected";
+               
+                //$"//div[@class='TVNationContainer' and contains(text(), {country})]";
+            var countryButton = FindBy(By.CssSelector(xPathCountrySelection));
             countryButton.Click();
 
 
 
             //Then we select city
-            var xPathCitySelection = $"//div[@class='TVCheckBox TVTableCitiesItem TVDisableCheckbox' and contains(text(),{city})]";
-            var cityButton = FindBy(By.XPath(xPathCitySelection));
+            var xPathCitySelection = "#page > div.tv_drop_panel.TVCityPanel > div.tv_content > div > div.TVTableCitiesBody > div > div:nth-child(4) > div.TVCheckBox.TVTableCitiesItem.TVDisableCheckbox";
+                //$"//div[@class='TVCheckBox TVTableCitiesItem TVDisableCheckbox' and contains(text(),{city})]";
+            var cityButton = FindBy(By.CssSelector(xPathCitySelection));
             cityButton.Click();
 
             return this;
@@ -50,8 +52,9 @@ namespace Lab8.Pages
 
 
             //Then We Select Country
-            var xPathCountryButton = $"//div[@class='TVCountryCheckboxContent' and ./div[contains(text(), {country})]]";
-            var countryButton = FindBy(By.XPath(xPathCountryButton));
+            var xPathCountryButton = "#page > div.tv_drop_panel.TVCountryPanel > div.tv_content > div > div.TVScrolledCountriesBody.TVStyleScroll > div > div:nth-child(10) > div.TVCountryCheckboxContent";
+                //$"//div[@class='TVCountryCheckboxContent' and ./div[contains(text(), {country})]]";
+            var countryButton = FindBy(By.CssSelector(xPathCountryButton));
             countryButton.Click();
 
             return this;

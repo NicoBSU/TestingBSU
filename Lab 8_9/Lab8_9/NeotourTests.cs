@@ -2,6 +2,7 @@ using Lab8.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System;
 using System.Text;
 
 namespace Lab8
@@ -17,6 +18,7 @@ namespace Lab8
             var option = new ChromeOptions();
             option.AddArguments("--headless", "--window-size=1920,1920");
             _driver = new ChromeDriver(option);
+            Console.WriteLine("Encoding: {0} | {1}", Console.OutputEncoding.EncodingName, Console.OutputEncoding.ToString());
         }
 
         [Test]

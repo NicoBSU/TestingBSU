@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -47,8 +48,12 @@ namespace Lab8.Pages
             CountryButton.Click();
 
 
-            //Then We Select Country by our parameter
+            //Then We Select Country by our parameter (also we fix encoding to launch on ubuntu jenkins)
             var xPathCountryButton = $"//div[@class='TVCountryItemCheckbox' and ./div/div[contains(text(), {country})]]";
+            var bytes = Encoding.Default.GetBytes(xPathCountryButton);
+            xPathCountryButton = Encoding.UTF8.GetString(bytes);
+
+
             var countryButton = FindBy(By.XPath(xPathCountryButton));
             countryButton.Click();
 

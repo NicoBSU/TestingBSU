@@ -23,13 +23,9 @@ namespace Lab8
         public void SearchToursTest()
         {
             var homePage = new HomePage(_driver).OpenPage();
-            byte[] bytes = Encoding.Default.GetBytes("Минск");
-            var city = Encoding.UTF8.GetString(bytes);
-            bytes = Encoding.Default.GetBytes("Египет");
-            var country = Encoding.UTF8.GetString(bytes);
 
-            homePage.EnterLocation(city)
-                .EnterCountry(country)
+            homePage.EnterLocation("Минск")
+                .EnterCountry("Египет")
                 .EnterDates(17,20)
                 .EnterNights(7,12)
                 .SearchTours();

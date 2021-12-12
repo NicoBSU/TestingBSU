@@ -16,9 +16,8 @@ namespace Lab8
         public void SetupDriver()
         {
             var option = new ChromeOptions();
-            option.AddArguments("--headless", "--window-size=1920,1920", "--lang=ru");
+            option.AddArguments("--headless", "--window-size=1920,1920", "--lang=ru-RU");
             _driver = new ChromeDriver(option);
-            Console.WriteLine("Encoding: {0} | {1}", Console.OutputEncoding.EncodingName, Console.OutputEncoding.ToString());
         }
 
         [Test]

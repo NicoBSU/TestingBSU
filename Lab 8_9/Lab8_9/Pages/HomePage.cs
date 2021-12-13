@@ -1,5 +1,4 @@
 ﻿using Lab_8_9.Models;
-using Lab_8_9.Models.TourSearchModal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -111,11 +110,6 @@ namespace Lab_8_9.Pages
         }
 
         
-        private IWebElement FindBy(By key)
-        {
-            var wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(5));
-            Thread.Sleep(100);
-            return wait.Until(driver => driver.FindElement(key));;
-        }
+        
     }
 }

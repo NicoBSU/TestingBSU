@@ -1,5 +1,8 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
+using System;
+using System.Threading;
 
 namespace Lab_8_9.Pages
 {
@@ -23,6 +26,14 @@ namespace Lab_8_9.Pages
             WebDriver.Navigate().GoToUrl(EntryUrl);
 
             return this;
+        }
+
+
+        protected IWebElement FindBy(By key)
+        {
+            var wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(5));
+            Thread.Sleep(100);
+            return wait.Until(driver => driver.FindElement(key));
         }
     }
 }

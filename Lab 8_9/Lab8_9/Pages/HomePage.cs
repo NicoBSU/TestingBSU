@@ -1,61 +1,85 @@
-﻿using System;
-using System.Text;
-using System.Threading;
+﻿using Lab_8_9.Models;
+using Lab_8_9.Models.TourSearchModal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Lab8.Pages
 {
     public class HomePage : Page
-    {
-        public HomePage(IWebDriver webDriver) : base(webDriver, "https://neotour.by/") { }
-
-        public string XPathLocation = "//*[@id=\"sppb-addon-1543614584688\"]/div/div/div/div/div/div/div/div[1]";
-        public string XPathCountry = "//*[@id=\"sppb-addon-1543614584688\"]/div/div/div/div/div/div/div/div[2]";
-        public string XPathDates = "//*[@id=\"sppb-addon-1543614584688\"]/div/div/div/div/div/div/div/div[3]";
-        public string XPathNights = "//*[@id=\"sppb-addon-1543614584688\"]/div/div/div/div/div/div/div/div[4]";
-        public string XPathSearchButton = "//*[@id=\"sppb-addon-1543614584688\"]/div/div/div/div/div/div/div/div[6]";
-
-
-        public IWebElement LocationButton => FindBy(By.XPath(XPathLocation));
-        public IWebElement CountryButton => FindBy(By.XPath(XPathCountry));
-        public IWebElement DatesButton => FindBy(By.XPath(XPathDates));
-        public IWebElement NightsButton => FindBy(By.XPath(XPathNights));
-        public IWebElement SubmitButton => FindBy(By.XPath(XPathSearchButton));
-
-        public HomePage EnterStartLocation(string country, string city)
+    { 
+        public HomePage(IWebDriver webDriver) : base(webDriver, "https://neotour.by/") {}
+        public override HomePage OpenPage()
         {
-            //By clicking on location button we open modal
-            LocationButton.Click();
+            WebDriver.Navigate().GoToUrl(EntryUrl);
+            return this;
+        }
 
-            //Then we find country button to click on
-            var xPathCountrySelection = $"//div[@class='TVNationContainer' and contains(text(), {country})]";
+
+
+        public HomePage TestSearchToursForm(TourSearchButtonsXPaths tourSearchModalDto, TourSearchTestData testData)
+        {
+            var buttons = FindTourSearchButtons(tourSearchModalDto);
+            EnterStartLocation(buttons["startLocation"], testData.startLocationCountry, testData.startLocationCity);
+
+            EnterDestinationCountry(buttons["destinationCountry"], testData.destinationCountry);
+
+            EnterDepartureDates(buttons["departureDates"], testData.earlierDepartureDate, testData.laterDepartureDate);
+
+            EnterNights(buttons["nights"], testData.minNights, testData.maxNights);
+
+            SearchToursButton(buttons["searchButton"]);
+
+            return this;
+
+        }
+
+        //Here we get all necessary buttons for FindTour form
+        private Dictionary<string, IWebElement> FindTourSearchButtons(TourSearchButtonsXPaths tourSearchModalDto)
+        {
+            var buttons = new Dictionary<string,IWebElement>();
+            buttons.Add("startLocation", FindBy(By.XPath(tourSearchModalDto.StartLocation)));
+            buttons.Add("destinationCountry", FindBy(By.XPath(tourSearchModalDto.DestinationCountry)));
+            buttons.Add("departureDates", FindBy(By.XPath(tourSearchModalDto.Dates)));
+            buttons.Add("nights", FindBy(By.XPath(tourSearchModalDto.Nights)));
+            buttons.Add("searchButton", FindBy(By.XPath(tourSearchModalDto.SearchButton)));
+
+            return buttons;
+        }
+
+        //Here we enter start location based on country and city
+        private HomePage EnterStartLocation(IWebElement enterStartLocationButton, string startLocationCountry, string startLocationCity)
+        {
+            enterStartLocationButton.Click();
+           
+            var xPathCountrySelection = $"//div[@class='TVNationContainer' and contains(text(), {startLocationCountry})]";
             FindBy(By.XPath(xPathCountrySelection)).Click();
 
-            //Then we select city
-            var xPathCitySelection = $"//div[@class='TVCheckBox TVTableCitiesItem TVDisableCheckbox' and contains(text(),{city})]";
+            var xPathCitySelection = $"//div[@class='TVCheckBox TVTableCitiesItem TVDisableCheckbox' and contains(text(),{startLocationCity})]";
             FindBy(By.XPath(xPathCitySelection)).Click();
 
             return this;
         }
 
-        public HomePage DestinationCountry(string country)
+        //Here we enter destination button
+        private HomePage EnterDestinationCountry(IWebElement enterDestinationButton, string destinationCountry)
         {
-            //By clicking on country button we open modal to choose which country to visit
-            CountryButton.Click();
+            enterDestinationButton.Click();
 
-            //Then We Select Destination Country
-            var xPathCountryButton = $"//div[@class='TVCountryCheckboxContent' and ./div[contains(text(), {country})]]";
+            var xPathCountryButton = $"//div[@class='TVCountryCheckboxContent' and ./div[contains(text(), {destinationCountry})]]";
             FindBy(By.XPath(xPathCountryButton)).Click();
 
             return this;
         }
 
-        public HomePage EnterDates(int earlierDepartureDate, int laterDepartureDate)
+        //Here we enter departure dates
+        private HomePage EnterDepartureDates(IWebElement enterDepartureDatesButton, int earlierDepartureDate, int laterDepartureDate)
         {
 
-            DatesButton.Click();
-            //Now that we've opened calendar modal, let's select dates
+            enterDepartureDatesButton.Click();
+            
             var xPathEarlierDeparture = $"//td[@class='TVAvailableDays' and @data-value='{earlierDepartureDate}']";
             var xPathLaterDeparture = $"//td[@class='TVAvailableDays' and @data-value='{laterDepartureDate}']";
 
@@ -65,9 +89,10 @@ namespace Lab8.Pages
             return this;
         }
 
-        public HomePage EnterNights(int minNights, int maxNights)
+        //Here we enter number of nights
+        private HomePage EnterNights(IWebElement enterNightsButton, int minNights, int maxNights)
         {
-            NightsButton.Click();
+            enterNightsButton.Click();
             var xPathMinNights = $"//div[./div[contains(text(),'{minNights}')]]";
             FindBy(By.XPath(xPathMinNights)).Click();
 
@@ -78,18 +103,13 @@ namespace Lab8.Pages
             return this;
         }
         
-
-        public HomePage SearchTours()
+        //Here we press search button
+        private HomePage SearchToursButton(IWebElement searchToursButton)
         {
-            SubmitButton.Click();
+            searchToursButton.Click();
             return this;
         }
 
-        public override HomePage OpenPage()
-        {
-            WebDriver.Navigate().GoToUrl(EntryUrl);
-            return this;
-        }
         
         private IWebElement FindBy(By key)
         {

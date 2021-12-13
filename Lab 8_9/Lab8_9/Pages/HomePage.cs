@@ -30,15 +30,11 @@ namespace Lab8.Pages
 
             //Then we find country button to click on
             var xPathCountrySelection = $"//div[@class='TVNationContainer' and contains(text(), {country})]";
-            //#page > div.tv_drop_panel.TVCityPanel > div.tv_content > div > div.TVTableCitiesHeader.TVWithoutFlightEnabled > div.TVTableCitiesNations > div.TVNationContainer.TVNationSelected
-            var countryButton = FindBy(By.XPath(xPathCountrySelection));
-            countryButton.Click();
+            FindBy(By.XPath(xPathCountrySelection)).Click();
 
             //Then we select city
             var xPathCitySelection = $"//div[@class='TVCheckBox TVTableCitiesItem TVDisableCheckbox' and contains(text(),{city})]";
-            //"#page > div.tv_drop_panel.TVCityPanel > div.tv_content > div > div.TVTableCitiesBody > div > div:nth-child(4) > div.TVCheckBox.TVTableCitiesItem.TVDisableCheckbox";
-            var cityButton = FindBy(By.XPath(xPathCitySelection));
-            cityButton.Click();
+            FindBy(By.XPath(xPathCitySelection)).Click();
 
             return this;
         }
@@ -48,12 +44,9 @@ namespace Lab8.Pages
             //By clicking on country button we open modal to choose which country to visit
             CountryButton.Click();
 
-
             //Then We Select Destination Country
             var xPathCountryButton = $"//div[@class='TVCountryCheckboxContent' and ./div[contains(text(), {country})]]";
-            //"#page > div.tv_drop_panel.TVCountryPanel > div.tv_content > div > div.TVScrolledCountriesBody.TVStyleScroll > div > div:nth-child(10) > div.TVCountryCheckboxContent"
-            var countryButton = FindBy(By.XPath(xPathCountryButton));
-            countryButton.Click();
+            FindBy(By.XPath(xPathCountryButton)).Click();
 
             return this;
         }
@@ -66,10 +59,8 @@ namespace Lab8.Pages
             var xPathEarlierDeparture = $"//td[@class='TVAvailableDays' and @data-value='{earlierDepartureDate}']";
             var xPathLaterDeparture = $"//td[@class='TVAvailableDays' and @data-value='{laterDepartureDate}']";
 
-            var earlierDepartureButton = FindBy(By.XPath(xPathEarlierDeparture));
-            earlierDepartureButton.Click();
-            var laterDepartureButton = FindBy(By.XPath(xPathLaterDeparture));
-            laterDepartureButton.Click();
+            FindBy(By.XPath(xPathEarlierDeparture)).Click();
+            FindBy(By.XPath(xPathLaterDeparture)).Click();
             
             return this;
         }
@@ -78,12 +69,10 @@ namespace Lab8.Pages
         {
             NightsButton.Click();
             var xPathMinNights = $"//div[./div[contains(text(),'{minNights}')]]";
-            var minNightsButton = FindBy(By.XPath(xPathMinNights));
-            minNightsButton.Click();
+            FindBy(By.XPath(xPathMinNights)).Click();
 
             var xPathMaxNights = $"//div[./div[contains(text(),'{maxNights}')]]";
-            var maxNightsButton = FindBy(By.XPath(xPathMinNights));
-            maxNightsButton.Click();
+            FindBy(By.XPath(xPathMinNights)).Click();
 
 
             return this;
@@ -104,7 +93,9 @@ namespace Lab8.Pages
         
         private IWebElement FindBy(By key)
         {
-            return new WebDriverWait(WebDriver, TimeSpan.FromSeconds(5)).Until(driver => driver.FindElement(key));
+            var wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(5));
+            Thread.Sleep(100);
+            return wait.Until(driver => driver.FindElement(key));;
         }
     }
 }

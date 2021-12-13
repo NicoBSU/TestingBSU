@@ -1,35 +1,23 @@
 ﻿using Lab_8_9.Models;
 using Lab_8_9.Models.TourSearchModal;
 using Lab_8_9.Services;
-using Lab8.Pages;
+using Lab_8_9.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace Lab8
+namespace Lab_8_9.Tests
 {
     [TestFixture]
-    public class NeotourTests
+    public class NeotourTests : CommonConditions
     {
-        private IWebDriver _driver;
-        private IPageService _pageService;
         
-        [SetUp]
-        public void SetupDriver()
-        {
-            var option = new ChromeOptions();
-            option.AddArguments("--headless", "--window-size=1920,1920", "--lang=ru-RU");
-            
-            _driver = new ChromeDriver(option);
-            _pageService = new PageService();
-        }
-
         [Test]
         public void SearchToursTest()
         {
-            var homePage = _pageService.GetHomePage(_driver);
-            
-            var testData = new TourSearchTestData
+            var homePage = new HomePage(_driver).OpenPage();
+
+            var testData = new TourSearchParameters
             {
                 startLocationCountry = "Беларусь",
                 startLocationCity = "Минск",
@@ -48,11 +36,57 @@ namespace Lab8
             Assert.AreEqual(homePage.CurrentUrl, expectedPage.CurrentUrl);
         }
         
-
-        [TearDown]
-        public void CloseDriver()
+        [Test]
+        public void Test2()
         {
-            _driver.Quit();
+            Assert.Pass();
+        }
+
+        [Test]
+        public void Test3()
+        {
+            Assert.Pass();
+        }
+        [Test]
+        public void Test4()
+        {
+            Assert.Pass();
+        }
+
+        [Test]
+        public void Test5()
+        {
+            Assert.Pass();
+        }
+
+        [Test]
+        public void Test6()
+        {
+            Assert.Pass();
+        }
+
+        [Test]
+        public void Test7()
+        {
+            Assert.Pass();
+        }
+
+        [Test]
+        public void Test8()
+        {
+            Assert.Pass();
+        }
+
+        [Test]
+        public void Test9()
+        {
+            Assert.Pass();
+        }
+
+        [Test]
+        public void Test10()
+        {
+            Assert.Pass();
         }
     }
 }

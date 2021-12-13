@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
-namespace Lab8.Pages
+namespace Lab_8_9.Pages
 {
     public class Page
     {

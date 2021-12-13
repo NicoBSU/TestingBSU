@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab_8_9.Models.TourSearchModal
+namespace Lab_8_9.Models
 {
-    public class TourSearchTestData
+    public class TourSearchParameters
     {
         public string startLocationCountry;
         public string startLocationCity;
@@ -15,5 +15,6 @@ namespace Lab_8_9.Models.TourSearchModal
         public int laterDepartureDate;
         public int minNights;
         public int maxNights;
+
     }
 }

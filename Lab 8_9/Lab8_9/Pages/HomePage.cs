@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Lab8.Pages
+namespace Lab_8_9.Pages
 {
     public class HomePage : Page
     { 
@@ -19,7 +19,7 @@ namespace Lab8.Pages
 
 
 
-        public HomePage TestSearchToursForm(TourSearchButtonsXPaths tourSearchModalDto, TourSearchTestData testData)
+        public HomePage TestSearchToursForm(TourSearchButtonsXPaths tourSearchModalDto, TourSearchParameters testData)
         {
             var buttons = FindTourSearchButtons(tourSearchModalDto);
             EnterStartLocation(buttons["startLocation"], testData.startLocationCountry, testData.startLocationCity);

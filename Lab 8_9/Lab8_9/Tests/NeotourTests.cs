@@ -35,13 +35,13 @@ namespace Lab_8_9.Tests
             Assert.AreEqual(homePage.CurrentUrl, expectedPage.CurrentUrl);
         }
         
-        [Test]
-        public void TestAddTourToSelection()
-        {
-            var tourSelectionPage = new TourSelectionPage(_driver).OpenPage();
-            tourSelectionPage.AddHotelToCompilation();
-            Assert.Pass();
-        }
+        //[Test]
+        //public void TestAddTourToSelection()
+        //{
+            //var tourSelectionPage = new TourSelectionPage(_driver).OpenPage();
+            //tourSelectionPage.AddHotelToCompilation();
+            //Assert.Pass();
+        //}
 
         //[Test]
         //public void Test3()

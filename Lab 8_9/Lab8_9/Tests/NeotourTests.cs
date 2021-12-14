@@ -39,7 +39,7 @@ namespace Lab_8_9.Tests
         public void TestAddTourToSelection()
         {
             var tourSelectionPage = new TourSelectionPage(_driver).OpenPage();
-            tourSelectionPage.AddToCompilation();
+            tourSelectionPage.AddHotelToCompilation();
             Assert.Pass();
         }
 
